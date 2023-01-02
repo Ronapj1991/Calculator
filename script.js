@@ -1,4 +1,5 @@
 const output = document.querySelector('.output');
+const decimalBtn = document.querySelector(".dot");
 output.innerText = "";
 
 let operation = "";
@@ -47,32 +48,38 @@ document.querySelector(".clear").addEventListener('click', (e) => {
     clearOutput();
     value1 = 0;
     value2 = 0;
+    decimalBtn.disabled = false;
 })
-document.querySelector(".dot").addEventListener('click', (e) => {
+decimalBtn.addEventListener('click', (e) => {
     output.append(".");
+    decimalBtn.disabled = true;
 })
 document.querySelector(".plus").addEventListener('click', (e) => {
     operation = "add";
-    value1 = parseInt(output.innerText);
+    value1 = parseFloat(output.innerText);
     clearOutput();
+    decimalBtn.disabled = false;
 })
 document.querySelector(".minus").addEventListener('click', (e) => {
     operation = "subtract";
-    value1 = parseInt(output.innerText);
+    value1 = parseFloat(output.innerText);
     clearOutput();
+    decimalBtn.disabled = false;
 })
 document.querySelector(".times").addEventListener('click', (e) => {
     operation = "multiply";
-    value1 = parseInt(output.innerText);
+    value1 = parseFloat(output.innerText);
     clearOutput();
+    decimalBtn.disabled = false;
 })
 document.querySelector(".divide").addEventListener('click', (e) => {
     operation = "divide";
-    value1 = parseInt(output.innerText);
+    value1 = parseFloat(output.innerText);
     clearOutput();
+    decimalBtn.disabled = false;
 })
 document.querySelector(".equals").addEventListener('click', (e) => {
-     value2 = parseInt(output.innerText);
+     value2 = parseFloat(output.innerText);
      clearOutput();
 
      switch (operation) {
@@ -91,6 +98,7 @@ document.querySelector(".equals").addEventListener('click', (e) => {
      }
 
      output.innerText = final;
+     decimalBtn.disabled = false;
 })
 
 function add(num1, num2) {
