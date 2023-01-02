@@ -2,7 +2,7 @@ const output = document.querySelector('.output');
 const decimalBtn = document.querySelector(".dot");
 output.innerText = "";
 
-let operation = "";
+let currentOperation = "";
 let userInput = 0;
 let value1 = 0;
 let value2 = 0;
@@ -48,6 +48,8 @@ document.querySelector(".clear").addEventListener('click', (e) => {
     clearOutput();
     value1 = 0;
     value2 = 0;
+    final = 0;
+    currentOperation = "";
     decimalBtn.disabled = false;
 })
 decimalBtn.addEventListener('click', (e) => {
@@ -55,34 +57,86 @@ decimalBtn.addEventListener('click', (e) => {
     decimalBtn.disabled = true;
 })
 document.querySelector(".plus").addEventListener('click', (e) => {
-    operation = "add";
-    value1 = parseFloat(output.innerText);
+    let temporary = parseFloat(output.innerText);
+
+    if (currentOperation === "add") {
+        value1 += temporary
+    } else if (currentOperation === "subtract") {
+        value1 -= temporary;
+    } else if (currentOperation === "multiply") {
+        value1 *= temporary;
+    } else if (currentOperation === "divide") {
+        value1 /= temporary;
+    } else {
+        value1 = temporary;
+    }
+
     clearOutput();
     decimalBtn.disabled = false;
+    currentOperation = "add";
 })
 document.querySelector(".minus").addEventListener('click', (e) => {
-    operation = "subtract";
-    value1 = parseFloat(output.innerText);
+    let temporary = parseFloat(output.innerText)
+    
+    if (currentOperation === "add") {
+        value1 += temporary
+    } else if (currentOperation === "subtract") {
+        value1 -= temporary;
+    } else if (currentOperation === "multiply") {
+        value1 *= temporary;
+    } else if (currentOperation === "divide") {
+        value1 /= temporary;
+    } else {
+        value1 = temporary;
+    }
+    
     clearOutput();
     decimalBtn.disabled = false;
+    currentOperation = "subtract";
 })
 document.querySelector(".times").addEventListener('click', (e) => {
-    operation = "multiply";
-    value1 = parseFloat(output.innerText);
+    let temporary = parseFloat(output.innerText)
+    
+    if (currentOperation === "add") {
+        value1 += temporary
+    } else if (currentOperation === "subtract") {
+        value1 -= temporary;
+    } else if (currentOperation === "multiply") {
+        value1 *= temporary;
+    } else if (currentOperation === "divide") {
+        value1 /= temporary;
+    } else {
+        value1 = temporary;
+    }
+
     clearOutput();
     decimalBtn.disabled = false;
+    currentOperation = "multiply";
 })
 document.querySelector(".divide").addEventListener('click', (e) => {
-    operation = "divide";
-    value1 = parseFloat(output.innerText);
+    let temporary = parseFloat(output.innerText)
+    
+    if (currentOperation === "add") {
+        value1 += temporary
+    } else if (currentOperation === "subtract") {
+        value1 -= temporary;
+    } else if (currentOperation === "multiply") {
+        value1 *= temporary;
+    } else if (currentOperation === "divide") {
+        value1 /= temporary;
+    } else {
+        value1 = temporary;
+    }
+
     clearOutput();
     decimalBtn.disabled = false;
+    currentOperation = "divide";
 })
 document.querySelector(".equals").addEventListener('click', (e) => {
      value2 = parseFloat(output.innerText);
      clearOutput();
 
-     switch (operation) {
+     switch (currentOperation) {
         case "add":
             final = add(value1, value2);
             break;
@@ -97,7 +151,7 @@ document.querySelector(".equals").addEventListener('click', (e) => {
             break;
      }
 
-     output.innerText = final;
+     display(final);
      decimalBtn.disabled = false;
 })
 
